@@ -3,14 +3,18 @@ import React, { useState } from 'react'
 import TextInput from '../../common/components/TextInput'
 import CommonButton from '../../common/components/Button'
 import LoginLayout from '../../components/LoginLayout'
+import { useDispatch, useSelector } from 'react-redux'
+import { addUser } from '../../store/slice/userSlice'
 
 
 
 export default function SignUp() {
 
+    const dispatch = useDispatch();
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const userData = useSelector((state)=>state.userSlice)
 
   return (
    <LoginLayout>
@@ -46,7 +50,13 @@ export default function SignUp() {
                 <CommonButton
                     name={'Sign Up'}
                     fullWidth
-                    onClick={()=>{console.log(password);
+                    onClick={()=>{
+                        const user = {
+                            name:name,
+                            email:email,
+                            password:password
+                        }
+                        dispatch(addUser(user))
                     }}
                 />
             </Box>
