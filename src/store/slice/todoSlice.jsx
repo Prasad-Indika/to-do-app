@@ -7,7 +7,8 @@ export const todoSlice = createSlice({
     name: 'todo',
     initialState: {
       data: [],
-      todoByUser: []
+      todoCompleted:[],
+      todoNotCompleted:[]
     },
 
     reducers: {
@@ -29,12 +30,13 @@ export const todoSlice = createSlice({
       updateStatus:(state,action)=>{
         const findTodo = state.data.find(item => item.id === action.payload);
         if (findTodo) {
-            findTodo.status = "complete"; 
+            findTodo.status = "completed"; 
         }
       },
       getTodoByUser: (state, action) => {
         const user = localStorage.getItem('user')
-        state.todoByUser = state.data.filter(todo => todo.user === user);
+        state.todoCompleted = state.data.filter(todo => todo.user === user && todo.status === 'completed');
+        state.todoNotCompleted = state.data.filter(todo => todo.user === user && todo.status === 'NotCompleted');
       }
     },
 

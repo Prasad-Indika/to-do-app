@@ -21,7 +21,7 @@ export default function AddUpdateTodoModal({onClose,visible,isUpdate=false,todo}
             user:user,
             title:title,
             description:description,
-            status:'NotComplete'
+            status:'NotCompleted'   // NotCompleted , completed
         } 
         dispatch(addTodo(newTodo));
         dispatch(getTodoByUser());

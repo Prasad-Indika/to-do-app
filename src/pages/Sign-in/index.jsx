@@ -62,6 +62,7 @@ export default function SignIn() {
             </Box>
             <Box sx={{margin:4}}>
                 <TextInput
+                    type="password"
                     placeholder={'Password'}
                     value={password}
                     onChange={(e)=>{setPassword(e.target.value)}}

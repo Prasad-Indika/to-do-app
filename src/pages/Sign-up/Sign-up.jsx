@@ -71,6 +71,7 @@ export default function SignUp() {
             </Box>
             <Box sx={{margin:4}}>
                 <TextInput
+                    type="password"
                     placeholder={'Password'}
                     value={password}
                     onChange={(e)=>{setPassword(e.target.value)}}
@@ -94,7 +95,7 @@ export default function SignUp() {
             </Box>
 
             <Box sx={{margin:4}}>
-                <Link to={"/sign-in"}>Have Account</Link>
+                <Link to={"/sign-in"}>Already Have Account? </Link>
             </Box>
         </Box>
    </LoginLayout>
