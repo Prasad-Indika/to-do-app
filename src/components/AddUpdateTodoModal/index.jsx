@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import TextInput from '../../common/components/TextInput'
 import CommonButton from '../../common/components/Button'
 import { useDispatch } from 'react-redux'
-import { addTodo } from '../../store/slice/todoSlice'
+import { addTodo, getTodoByUser, updateTodo } from '../../store/slice/todoSlice'
 
-export default function AddUpdateTodoModal({onClose,visible}) {
+export default function AddUpdateTodoModal({onClose,visible,isUpdate=false,todo}) {
 
     const dispatch = useDispatch();
-    const [title,setTitle] = useState('');
-    const [description,setDescription] = useState('');
+    const [title,setTitle] = useState(isUpdate ? todo.title : '');
+    const [description,setDescription] = useState(isUpdate ? todo.description : '');
 
     const handleSaveTodo = ()=>{
         const id = Math.floor(Math.random()*900) + 100
@@ -22,12 +22,24 @@ export default function AddUpdateTodoModal({onClose,visible}) {
             status:'NotComplete'
         } 
         dispatch(addTodo(newTodo));
+        dispatch(getTodoByUser());
+        onClose();
+    }
+
+    const handleUpdateTodo = ()=>{
+        const updatedTodo = {
+            id:todo.id,
+            title:title,
+            description:description
+        }
+        dispatch(updateTodo(updatedTodo));
+        dispatch(getTodoByUser());
         onClose();
     }
   return (
     <Dialog onClose={onClose} open={visible} maxWidth={"lg"} sx={{margin:"10px"}}>
         <Box sx={{margin:'10px'}}>
-            <DialogTitle>New Todo</DialogTitle>
+            <DialogTitle>{isUpdate? "Update Todo" : "New Todo"}</DialogTitle>
             <Box sx={{margin:'10px'}}>
                 <TextInput
                     placeholder={"Title"}
@@ -44,13 +56,11 @@ export default function AddUpdateTodoModal({onClose,visible}) {
             </Box>
             <Box sx={{margin:'10px'}}>
                 <CommonButton
-                    name={"Save"}
+                    name={isUpdate ? "Update" : "Save"}
                     fullWidth
-                    onClick={()=>{handleSaveTodo()}}
+                    onClick={isUpdate ? handleUpdateTodo : handleSaveTodo}
                 />
             </Box>
-
-
          </Box>
 
     </Dialog>
