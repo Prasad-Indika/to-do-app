@@ -1,13 +1,14 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import TextInput from '../../common/components/TextInput'
 import CommonButton from '../../common/components/Button'
 import LoginLayout from '../../components/LoginLayout'
 
 
 
-export default function SignIn() {
+export default function SignUp() {
 
+    const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
@@ -16,10 +17,17 @@ export default function SignIn() {
         <Box>
             <Box sx={{margin:4}}>
                 <Typography variant="h3" gutterBottom style={{ color:'#167bf0' }}>
-                    Sign In
+                    Sign Up
                 </Typography>
             </Box>      
 
+            <Box sx={{margin:4}}>
+                <TextInput
+                    placeholder={'Name'}
+                    value={name}
+                    onChange={(e)=>{setName(e.target.value)}}
+                />
+            </Box>
             <Box sx={{margin:4}}>
                 <TextInput
                     placeholder={'Email'}
@@ -36,8 +44,10 @@ export default function SignIn() {
             </Box>
             <Box sx={{margin:4}}>
                 <CommonButton
-                    name={'Login'}
+                    name={'Sign Up'}
                     fullWidth
+                    onClick={()=>{console.log(password);
+                    }}
                 />
             </Box>
         </Box>
