@@ -16,7 +16,11 @@ export default function SignUp() {
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [emailError,setEmailError] = useState('');
+    const [nameError,setNameError] = useState('');
     const userData = useSelector((state)=>state.userSlice)
+
+    const isValidFields = name && email && password && !emailError && !nameError;
 
   return (
    <LoginLayout>
@@ -31,15 +35,39 @@ export default function SignUp() {
                 <TextInput
                     placeholder={'Name'}
                     value={name}
-                    onChange={(e)=>{setName(e.target.value)}}
+                    onChange={(e)=>{
+                        setName(e.target.value)
+                        if (!/^[a-zA-Z]+( [a-zA-Z]+)*$/.test(e.target.value)) {
+                            setNameError("Invalid Name");
+                        } else {
+                            setNameError("");
+                        }
+                    }}
                 />
+                {nameError && (
+                    <div style={{color: "red", fontSize: "12px"}}>
+                        {nameError}
+                    </div>
+                )}
             </Box>
             <Box sx={{margin:4}}>
                 <TextInput
                     placeholder={'Email'}
                     value={email}
-                    onChange={(e)=>{setEmail(e.target.value)}}
+                    onChange={(e)=>{
+                        setEmail(e.target.value)
+                        if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e.target.value)){
+                            setEmailError("Invalid Email")
+                        }else{
+                            setEmailError("")
+                        }
+                    }}
                 />
+                {emailError && (
+                    <div style={{color: "red", fontSize: "12px"}}>
+                        {emailError}
+                    </div>
+                )}
             </Box>
             <Box sx={{margin:4}}>
                 <TextInput
@@ -61,6 +89,7 @@ export default function SignUp() {
                         dispatch(addUser(user))
                         navigate("/sign-in")
                     }}
+                    disabled={!isValidFields}
                 />
             </Box>
 

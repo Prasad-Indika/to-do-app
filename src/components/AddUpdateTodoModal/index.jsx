@@ -11,6 +11,8 @@ export default function AddUpdateTodoModal({onClose,visible,isUpdate=false,todo}
     const [title,setTitle] = useState(isUpdate ? todo.title : '');
     const [description,setDescription] = useState(isUpdate ? todo.description : '');
 
+    const isValidFields = title && description;
+
     const handleSaveTodo = ()=>{
         const id = Math.floor(Math.random()*900) + 100
         const user = localStorage.getItem('user');
@@ -59,6 +61,7 @@ export default function AddUpdateTodoModal({onClose,visible,isUpdate=false,todo}
                     name={isUpdate ? "Update" : "Save"}
                     fullWidth
                     onClick={isUpdate ? handleUpdateTodo : handleSaveTodo}
+                    disabled={!isValidFields}
                 />
             </Box>
          </Box>

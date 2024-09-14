@@ -13,7 +13,9 @@ export default function SignIn() {
     const navigate = useNavigate();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [emailError,setEmailError] = useState('');
     const userData = useSelector((state)=>state.userSlice.data)
+    const isValidFields = email && password && !emailError;
 
     const handleLogin = ()=>{
         const user = userData.find(user => user.email === email)
@@ -43,8 +45,20 @@ export default function SignIn() {
                 <TextInput
                     placeholder={'Email'}
                     value={email}
-                    onChange={(e)=>{setEmail(e.target.value)}}
+                    onChange={(e)=>{
+                        setEmail(e.target.value)
+                        if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e.target.value)){
+                            setEmailError("Invalid Email")
+                        }else{
+                            setEmailError("")
+                        }
+                    }}
                 />
+                {emailError && (
+                    <div style={{color: "red", fontSize: "12px"}}>
+                        {emailError}
+                    </div>
+                )}
             </Box>
             <Box sx={{margin:4}}>
                 <TextInput
@@ -61,10 +75,11 @@ export default function SignIn() {
                         console.log(userData);
                         handleLogin();
                     }}
+                    disabled={!isValidFields}
                 />
             </Box>
             <Box sx={{margin:4}}>
-                <Link to={"/sign-up"}>New Account</Link>
+                <Link to={"/sign-up"}>Create New Account</Link>
             </Box>
         </Box>
    </LoginLayout>
