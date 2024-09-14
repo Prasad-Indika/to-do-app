@@ -7,7 +7,6 @@ import AddUpdateTodoModal from '../../components/AddUpdateTodoModal';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoItem from '../../components/TodoItem';
 import { deleteTodo, getTodoByUser, updateStatus } from '../../store/slice/todoSlice';
-
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -22,7 +21,6 @@ export default function TodoList() {
     const [selectedTodo,setSelectedTodo] = useState({});
     const todoCompletedData = useSelector((state)=>state.todoSlice.todoCompleted)
     const todoNotCompletedData = useSelector((state)=>state.todoSlice.todoNotCompleted)
-
     const [status, setStatus] = useState('0');
 
     const handleChange = (event) => {
@@ -56,7 +54,6 @@ export default function TodoList() {
         <Box sx={{flexGrow:1}}>
             <Card sx={{margin:'5px',height:'100%'}}>
                 <Box sx={{display:'flex' ,justifyContent:'space-between',margin:'10px'}}>
-
                     <Box>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Status</InputLabel>

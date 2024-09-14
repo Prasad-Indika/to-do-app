@@ -6,8 +6,6 @@ import LoginLayout from '../../components/LoginLayout'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-
-
 export default function SignIn() {
 
     const navigate = useNavigate();
@@ -27,8 +25,7 @@ export default function SignIn() {
                 console.log("pasword incorrect");    
             }   
         }else{
-            console.log("No user");
-            
+            console.log("No user");        
         }
     }
 
