@@ -7,12 +7,6 @@ export const userSlice = createSlice({
     },
 
     reducers: {
-     
-      incrementByAmount: (state, action) => {
-        state.value += action.payload
-      },
-
-      
       addUser: (state,action) =>{
         state.data.push(action.payload);
       }
@@ -20,6 +14,6 @@ export const userSlice = createSlice({
 
   })
 
-export const {incrementByAmount, addUser } = userSlice.actions
+export const {addUser } = userSlice.actions
 
 export default userSlice.reducer

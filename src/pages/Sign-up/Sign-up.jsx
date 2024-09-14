@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../../store/slice/userSlice'
 
 
-
 export default function SignUp() {
 
     const dispatch = useDispatch();
