@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../../store/slice/userSlice'
 
 
+
 export default function SignUp() {
 
     const dispatch = useDispatch();
@@ -56,6 +57,15 @@ export default function SignUp() {
                             password:password
                         }
                         dispatch(addUser(user))
+                    }}
+                />
+            </Box>
+            <Box sx={{margin:4}}>
+                <CommonButton
+                    name={'get'}
+                    fullWidth
+                    onClick={()=>{
+                        console.log(userData);       
                     }}
                 />
             </Box>
