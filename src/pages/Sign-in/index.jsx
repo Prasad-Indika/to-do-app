@@ -3,13 +3,32 @@ import React, { useState } from 'react'
 import TextInput from '../../common/components/TextInput'
 import CommonButton from '../../common/components/Button'
 import LoginLayout from '../../components/LoginLayout'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 
 export default function SignIn() {
 
+    const navigate = useNavigate();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const userData = useSelector((state)=>state.userSlice.data)
+
+    const handleLogin = ()=>{
+        const user = userData.find(user => user.email === email)
+        if(user){
+            if(user.password === password){
+                localStorage.setItem('user',user.email)
+                navigate("/todolist")
+            }else{
+                console.log("pasword incorrect");    
+            }   
+        }else{
+            console.log("No user");
+            
+        }
+    }
 
   return (
    <LoginLayout>
@@ -38,7 +57,14 @@ export default function SignIn() {
                 <CommonButton
                     name={'Login'}
                     fullWidth
+                    onClick={()=>{
+                        console.log(userData);
+                        handleLogin();
+                    }}
                 />
+            </Box>
+            <Box sx={{margin:4}}>
+                <Link to={"/sign-up"}>New Account</Link>
             </Box>
         </Box>
    </LoginLayout>

@@ -5,11 +5,13 @@ import CommonButton from '../../common/components/Button'
 import LoginLayout from '../../components/LoginLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '../../store/slice/userSlice'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
 export default function SignUp() {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
@@ -57,17 +59,13 @@ export default function SignUp() {
                             password:password
                         }
                         dispatch(addUser(user))
+                        navigate("/sign-in")
                     }}
                 />
             </Box>
+
             <Box sx={{margin:4}}>
-                <CommonButton
-                    name={'get'}
-                    fullWidth
-                    onClick={()=>{
-                        console.log(userData);       
-                    }}
-                />
+                <Link to={"/sign-in"}>Have Account</Link>
             </Box>
         </Box>
    </LoginLayout>

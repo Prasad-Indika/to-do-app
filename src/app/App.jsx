@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import SignIn from '../pages/Sign-in'
 import SignUp from '../pages/Sign-up/Sign-up'
-import { Route, Routes,Navigate, Link } from 'react-router-dom';
+import { Route, Routes,Navigate } from 'react-router-dom';
 import TodoList from '../pages/TodoList';
 
 function App() {
